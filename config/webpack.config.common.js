@@ -146,12 +146,20 @@ module.exports = {
   // }
   optimization: {
     splitChunks: {
-        cacheGroups: {
-            default: {
-                name: 'common',
-                chunks: 'initial'
-            }
-        }
+      minSize:30000,
+      cacheGroups: {
+          default: {
+            name: 'common',
+            chunks: 'initial',
+            priority:-20,
+          },
+          vendors: {  //拆分第三方库（通过npm|yarn安装的库）
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendor',
+            chunks: 'initial',
+            priority: -10
+          }
+      }
     }
 }
 }

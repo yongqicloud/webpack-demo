@@ -14,9 +14,9 @@ new Vue({
   }
 })
 
-// import _ from 'lodash'
-// let arr = ['a', 'b', 'c', 'd']
+import _ from 'lodash'
+let arr = ['a', 'b', 'c', 'd']
 
-// let arr2 = _.chunk(arr, 3)
-// console.log(arr2)
+let arr2 = _.chunk(arr, 3)
+console.log(arr2)
 
