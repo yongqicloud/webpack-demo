@@ -30,6 +30,8 @@ const cssLoader = function(firstLoader){
   ]
 }
 module.exports = {
+  devtool: 'source-map',
+
   entry:{
     // lodash: path.resolve(__dirname, '../src/lodash.js'),
     app:path.resolve(__dirname,'../src/app.js')
@@ -120,46 +122,47 @@ module.exports = {
     new VueLoaderPlugin(),
     // 打包style
   ],
+  
   // optimization: {
   //   splitChunks: {
-  //     chunks: 'async',
-  //     minSize: 30000,
-  //     minRemainingSize: 0,
-  //     maxSize: 0,
-  //     minChunks: 1,
-  //     maxAsyncRequests: 6,
-  //     maxInitialRequests: 4,
-  //     automaticNameDelimiter: '~',
-  //     automaticNameMaxLength: 30,
+  //     minSize:30000,
   //     cacheGroups: {
-  //       vendors: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         priority: -10
-  //       },
-  //       default: {
-  //         minChunks: 2,
-  //         priority: -20,
-  //         reuseExistingChunk: true
-  //       }
+  //         default: {
+  //           name: 'common',
+  //           chunks: 'initial',
+  //           priority:-20,
+  //         },
+  //         vendors: {  //拆分第三方库（通过npm|yarn安装的库）
+  //           test: /[\\/]node_modules[\\/]/,
+  //           name: 'vendor',
+  //           chunks: 'initial',
+  //           priority: -10
+  //         }
   //     }
   //   }
   // }
   optimization: {
     splitChunks: {
-      minSize:30000,
+      chunks: 'all',
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 6,
+      maxInitialRequests: 4,
+      automaticNameDelimiter: '~',
+      automaticNameMaxLength: 30,
       cacheGroups: {
-          default: {
-            name: 'common',
-            chunks: 'initial',
-            priority:-20,
-          },
-          vendors: {  //拆分第三方库（通过npm|yarn安装的库）
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendor',
-            chunks: 'initial',
-            priority: -10
-          }
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 1,
+          priority: -20,
+          reuseExistingChunk: true
+        }
       }
     }
-}
+  }
+
 }
